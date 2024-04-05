@@ -33,7 +33,7 @@ Time banks at the beginning of the hand                        ``time_banks``   
 ============================================================== ======================== ===========================
 
 Author
-^^^^^^
+------
 
 The ``author`` field describes the annotator and is of TOML native string type. The value should represent a properly capitalized full name of the annotator as in ``"First_name[ Middle_name(s)...] Last_name"`` or a mononym ``"Name"`` depending on their preferences.
 
