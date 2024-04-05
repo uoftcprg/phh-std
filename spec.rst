@@ -3,7 +3,45 @@ Specification
 
 The PHH format is a derivative of the `Tom's Obvious, Minimal Language (TOML) format <https://toml.io/>`_. This design allows PHH files to take advantage of TOML format's type system and be human-readable and writable while maintaining easy parsability by software systems. This differs from historical game file formats like `PGN <_static/PGN_Reference.txt>`_ or `SGF <https://www.red-bean.com/sgf/>`_ which use in-house formatting.
 
-The PHH format puts restrictions on the naming and types of the key/values, with which the poker games are described. These definitions, named "fields", fall under two classifications. The first involves state construction and progression and must be specified. The second describes various miscellaneous information about the game and may be omitted by the annotator.
+The PHH format puts restrictions on the naming and types of the key/values, with which the poker games are described. These definitions, named "fields", fall under two classifications. The first involves state construction and progression and must be specified. The second describes various miscellaneous information about the game and may be omitted by the annotator. The full fields are described below.
+
+============================================================== ======================== ================================== ========
+Field                                                          Name                     TOML Native Type                   Required
+============================================================== ======================== ================================== ========
+Variant code                                                   ``variant``              String                             yes
+Antes                                                          ``antes``                Array of integers or floats        yes
+Blinds/Straddles                                               ``blinds_or_straddles``  Array of integers or floats        yes
+Bring-in                                                       ``bring_in``             Integer or float                   yes
+Small bet                                                      ``small_bet``            Integer or float                   yes
+Big bet                                                        ``big_bet``              Integer or float                   yes
+Min bet                                                        ``min_bet``              Integer or float                   yes
+Starting stacks                                                ``starting_stacks``      Array of integers, floats, or null yes
+Actions                                                        ``actions``              Array of strings                   yes
+Annotator full name or mononym                                 ``author``               String                             no
+Event name                                                     ``event``                String                             no
+Event or organizer URL                                         ``url``                  String                             no
+Venue street-level address                                     ``address``              String                             no
+Venue city                                                     ``city``                 String                             no
+Venue region, state, or province                               ``region``               String                             no
+Venue postal code                                              ``postal_code``          String                             no
+Venue country                                                  ``country``              String                             no
+Timestamp at the start of the hand                             ``time``                 Local time                         no
+`IANA time zone <https://www.iana.org/time-zones>`_            ``time_zone``            String                             no
+Event day                                                      ``day``                  Integer                            no
+Event month                                                    ``month``                Integer                            no
+Event year                                                     ``year``                 Integer                            no
+Hand number                                                    ``hand``                 Integer                            no
+Tournament level                                               ``level``                Integer                            no
+Players' seat numbers                                          ``seats``                Array of integers                  no
+The number of seats                                            ``seat_count``           Integer                            no
+Table number                                                   ``table``                Integer                            no
+Player full names or mononyms                                  ``players``              Array of strings                   no
+Final stacks                                                   ``finishing_stacks``     Array of integers or floats        no
+`ISO 4127 <https://www.iso.org/standard/64758.html>`_ currency ``currency``             String                             no
+Ante uniformity                                                ``ante_trimming_status`` Boolean                            no
+Allocated time per action                                      ``time_limit``           Integer or float                   no
+Time banks at the beginning of the hand                        ``time_banks``           Array of integers or floats        no
+============================================================== ======================== ================================== ========
 
 Objective
 ---------
