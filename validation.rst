@@ -1,0 +1,8 @@
+Validation
+==========
+
+We performed multiple experiments in order to validate the correctness of the PHH format, the sample hand histories, and our open-source parser implementation.
+
+First, all the hands included in the supplementary were validated through round-trip testing where the files were converted into snapshots of game states at each action step. These snapshots were then converted back into hand files and compared against the originals. Next, we developed a poker bot evaluation platform with 4 fixed-policy agents biased toward different poker actions and an agent connected to the `Slumbot <https://www.slumbot.com/>`_ API, the winning heads-up poker agent in the 2012 `Annual Computer Poker Competition <http://www.computerpokercompetition.org/>`_. Overall, these agents competed against each other for over ten thousand hands. These hands were then saved and the same round-trip testing method was carried out to these files.
+
+Additionally, the parsed games for the `Pluribus <https://doi.org/10.1126/science.aay2400>`_ hands were checked for consistency and correctness by comparing the final stacks with the payoffs provided in the dataset in the supplementary of `Brown and Sandholm <https://doi.org/10.1126/science.aay2400>`_. Similarly, the most of the televised poker hands from our historical selections and the final table of the `2023 WSOP Event #43: $50,000 PPC -- Day 5 <https://www.pokernews.com/news/2023/06/brian-rast-wins-ppc-for-third-time-43877.htm>`_ had overlays of final player stacks in the source video from which we verified that the actions lead to the corresponding stack values. The actions were also checked for violations of the `2023 WSOP Tournament Rules <_static/2023-WSOP-Tournament-Rules.pdf>`_.
