@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Poker Hand History (PHH) File Format Specification'
+project = 'Poker Hand History File Format Specification'
 copyright = '2024, Juho Kim'
 author = 'Juho Kim'
 release = '0.0.0'
