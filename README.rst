@@ -31,3 +31,5 @@ If you use the PHH file format in your research, please cite the following:
          archivePrefix={arXiv},
          primaryClass={cs.AI}
    }
+
+The above preprint has been accepted to the 2024 IEEE Conference on Games (CoG). When the proceedings are published, the BibTex above will be updated to point to the published paper.
