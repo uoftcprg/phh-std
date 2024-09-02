@@ -23,13 +23,13 @@ If you use the PHH file format in your research, please cite the following:
 
 .. code-block:: bibtex
 
-   @misc{kim2024recording,
-         title={Recording and Describing Poker Hands}, 
-         author={Juho Kim},
-         year={2024},
-         eprint={2312.11753},
-         archivePrefix={arXiv},
-         primaryClass={cs.AI}
-   }
-
-The above preprint has been accepted to the 2024 IEEE Conference on Games (CoG). When the proceedings are published, the BibTex above will be updated to point to the published paper.
+   @INPROCEEDINGS{10645611,
+     author={Kim, Juho},
+     booktitle={2024 IEEE Conference on Games (CoG)}, 
+     title={Recording and Describing Poker Hands}, 
+     year={2024},
+     volume={},
+     number={},
+     pages={1-8},
+     keywords={Graphics;Machine learning algorithms;Games;Manuals;Software systems;Distance measurement;Recording;Card games;Games of chance;Game design;Multi-agent systems;Poker;Rule based systems;Scripting;Strategy games},
+     doi={10.1109/CoG60054.2024.10645611}}
