@@ -23,6 +23,7 @@
    discussion
    conclusion
    contributing
+   changelog
 
 Indices and tables
 ==================

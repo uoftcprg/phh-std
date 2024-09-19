@@ -3,34 +3,38 @@ Optional Fields
 
 The optional fields may be left unspecified by the annotator. The complete list of optional fields and their TOML native types are tabulated below.
 
-============================================================== ======================== ===========================
-Field                                                          Name                     TOML Native Type
-============================================================== ======================== ===========================
-Annotator full name or mononym                                 ``author``               String
-Event name                                                     ``event``                String
-Event or organizer URL                                         ``url``                  String
-Venue street-level address                                     ``address``              String
-Venue city                                                     ``city``                 String
-Venue region, state, or province                               ``region``               String
-Venue postal code                                              ``postal_code``          String
-Venue country                                                  ``country``              String
-Timestamp at the start of the hand                             ``time``                 Local time
-`IANA time zone <https://www.iana.org/time-zones>`_            ``time_zone``            String
-Event day                                                      ``day``                  Integer
-Event month                                                    ``month``                Integer
-Event year                                                     ``year``                 Integer
-Hand number                                                    ``hand``                 Integer
-Tournament level                                               ``level``                Integer
-Players' seat numbers                                          ``seats``                Array of integers
-The number of seats                                            ``seat_count``           Integer
-Table number                                                   ``table``                Integer
-Player full names or mononyms                                  ``players``              Array of strings
-Final stacks                                                   ``finishing_stacks``     Array of integers or floats
-`ISO 4127 <https://www.iso.org/standard/64758.html>`_ currency ``currency``             String
-Ante uniformity                                                ``ante_trimming_status`` Boolean
-Allocated time per action                                      ``time_limit``           Integer or float
-Time banks at the beginning of the hand                        ``time_banks``           Array of integers or floats
-============================================================== ======================== ===========================
+============================================================== ========================== ===========================
+Field                                                          Name                       TOML Native Type
+============================================================== ========================== ===========================
+Annotator full name or mononym                                 ``author``                 String
+Event name                                                     ``event``                  String
+Event or organizer URL                                         ``url``                    String
+Venue                                                          ``venue``                  String
+Venue street-level address                                     ``address``                String
+Venue city                                                     ``city``                   String
+Venue region, state, or province                               ``region``                 String
+Venue postal code                                              ``postal_code``            String
+Venue country                                                  ``country``                String
+Timestamp at the start of the hand                             ``time``                   Local time
+`IANA time zone <https://www.iana.org/time-zones>`_            ``time_zone``              String
+Time zone abbreviation                                         ``time_zone_abbreviation`` String
+Event day                                                      ``day``                    Integer
+Event month                                                    ``month``                  Integer
+Event year                                                     ``year``                   Integer
+Hand name or number                                            ``hand``                   String or integer
+Tournament level                                               ``level``                  Integer
+Players' seat numbers                                          ``seats``                  Array of integers
+The number of seats                                            ``seat_count``             Integer
+Table name or number                                           ``table``                  String or integer
+Player full names or mononyms                                  ``players``                Array of strings
+Final stacks                                                   ``finishing_stacks``       Array of integers or floats
+Winnings                                                       ``winnings``               Array of integers or floats
+`ISO 4127 <https://www.iso.org/standard/64758.html>`_ currency ``currency``               String
+Currency symbol                                                ``currency_symbol``        String
+Ante uniformity                                                ``ante_trimming_status``   Boolean
+Allocated time per action                                      ``time_limit``             Integer or float
+Time banks at the beginning of the hand                        ``time_banks``             Array of integers or floats
+============================================================== ========================== ===========================
 
 Author
 ------
@@ -51,6 +55,11 @@ URL
 ^^^
 
 The ``url`` field contains a string URL relevant to the event. This field is particularly important for online poker hands where the venue might not be a physical location. Still, the annotator may choose to specify a relevant URL to the organizer's website or tournament website for physical poker hands, as well. The link should be prefixed with substrings like ``http://`` or ``https://`` to denote the internet communication protocol.
+
+Venue
+^^^^^
+
+The ``venue`` field contains a string value that may or may not include the name of the venue in which the hand was played (e.g. online poker rooms).
 
 Address
 ^^^^^^^
@@ -82,12 +91,17 @@ Time
 
 The ``time`` field should contain the approximate time the hand began as a TOML native local time without the timezone information.
 
-If the ``time_zone`` field is defined, the time is assumed to be of that time zone. Otherwise, if every one of the following three fields -- ``city,`` ``region,`` and ``country`` -- are defined, it is assumed that the time is in the local time zone of the location of the hand. If the two previous conditions are not satisfied, the time is assumed to be in Coordinated Universal Time (UTC).
+If the ``time_zone`` and/or ``time_zone_abbreviation`` field(s) is/are defined, the time is assumed to be of that/those. Otherwise, if every one of the following three fields -- ``city,`` ``region,`` and ``country`` -- are defined, it is assumed that the time is in the local time zone of the location of the hand. If the two previous conditions are not satisfied, the time is assumed to be in Coordinated Universal Time (UTC).
 
 Time Zone
 ^^^^^^^^^
 
 The ``time_zone`` field contains a value of type string and must represent an IANA time zone in the latest version of the `IANA time zone <https://www.iana.org/time-zones>`_ database available like ``America/Toronto``.
+
+Time Zone Abbreviation
+^^^^^^^^^^^^^^^^^^^^^^
+
+The ``time_zone_abbreviation`` field contains a value of type string and must represent a time zone abbreviation like ``EDT`` or ``UTC``.
 
 Day
 ^^^
@@ -133,7 +147,7 @@ The ``seat_count`` field denotes the number of seats and must have an integer va
 Table
 ^^^^^
 
-The ``table`` field denotes the table number the hand is played in, as an integer value. Typically, these are counted from ``1``.
+The ``table`` field denotes the table name or number the hand is played in, as a string or an integer value. If numbered, these are typically counted from ``1``.
 
 Miscellaneous Fields
 --------------------
@@ -150,10 +164,20 @@ The ``finishing_stacks`` field denotes the final stacks as an array of non-negat
 
 The description of finishing stacks is helpful as the parser may not be aware of the granularity of the currency the chips are in or the rake applied in the end. For example, dollars can be broken down to cents whereas Japanese Yen must be of an integral value. On top of this, in a physical setting where chips are used, depending on the denominations, odd chip situations may arise where the player out of position is given the extra odd chip that cannot be broken further. It is, of course, infeasible to describe all the different chip values each player has in a poker hand history format. These inaccuracies are inherent drawbacks of using purely numerical representations to describe the stack values. It is worth noting that the inconsistencies caused by such circumstances only lead to extremely minor ambiguities in the final stack sizes that should not significantly impact the expected value calculations.
 
+Winnings
+^^^^^^^^
+
+The ``winnings`` field denotes the winnings (i.e. collected pots) as an array of non-negative integers or floats. It may also be specified for a non-terminal hand history file, which can be interpreted as the winnings after all the action notations are applied (not very useful since winnings are zeros while the hand is ongoing). If rakes are applied the winnings should denote the post-rake values.
+
 Currency
 ^^^^^^^^
 
 The ``currency`` field denotes what currency the chips are in. The value must be of string and be one of three letter currency values in the `ISO 4127 <https://www.iso.org/standard/64758.html>`_ standard.
+
+Currency Symbol
+^^^^^^^^^^^^^^^
+
+The ``currency_symbol`` field denotes the symbol of the currency the chips are in. The value must be a single-character string like ``"$"``.
 
 Ante Trimming Status
 ^^^^^^^^^^^^^^^^^^^^

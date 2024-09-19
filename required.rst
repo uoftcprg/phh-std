@@ -146,7 +146,7 @@ The ``min_bet`` field, a positive integer or a float, denotes the minimum bet in
 Starting Stacks
 ^^^^^^^^^^^^^^^
 
-The ``starting_stacks`` field denotes the starting stacks of each player and is an array of positive integers or floats of length equal to the number of players. All stack sizes must strictly be non-zero. Unknown stack values can be denoted as ``null``.
+The ``starting_stacks`` field denotes the starting stacks of each player and is an array of positive integers or floats of length equal to the number of players. All stack sizes must strictly be non-zero. Unknown stack values can be denoted as ``inf`` (i.e. an infinite value).
 
 State Progression
 -----------------
@@ -237,7 +237,7 @@ This action represents completion, betting, or raising to a positive integral or
 Showing/Mucking Hole Cards
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The showdown action is performed at the end of the hand or after all players go all-in. It represents showing of the hole cards to try to win the pot or after an all-in, or mucking of the hole cards. This action accepts an optional argument of cards which, if supplied, must all be known. The omission of this field represents mucking while the inclusion represents showing.
+The showdown action is performed at the end of the hand or after all players go all-in. It represents either the showing of the hole cards to try to win the pot, after an all-in, or after all other players fold or the mucking of the hole cards signifying the player's forfeiture on his or her stake of the pot. This action accepts an optional argument of cards. The omission of this argument represents mucking while the inclusion represents showing. If a hand is part of a tournament and the player elects to show, all his/her hole cards must be known (note that in all-in situations, active players are forced to show their hand). If it is a cash-game, then some or all of the cards in the argument may be unknown (e.g. ``??Ad``) to denote that the player chose to both not muck their hand and not show their hole cards (partially or completely).
 
 No-operations
 ^^^^^^^^^^^^^
