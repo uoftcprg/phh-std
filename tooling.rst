@@ -12,14 +12,26 @@ An example code snippet loading a PHH file in `PokerKit <https://doi.org/10.1109
 
    from pokerkit import *
    
-   # Hand loading
-   
-   with open("...", "rb") as file:
+   # Load hand
+   with open("path/to/file.phh", "rb") as file:
        hh = HandHistory.load(file)
    
    # Iterate through each action step
-   
    for state in hh:
+       ...
+
+An example code snippet loading a bulk PHH file in `PokerKit <https://doi.org/10.1109/TG.2023.3325637>`_ is shown below.
+
+.. code-block:: python
+
+   from pokerkit import *
+
+   # Load hands
+   with open("path/to/file.phhs", "rb") as file:
+       hhs = HandHistory.load_all(file)
+
+   # Iterate through each hand history
+   for hh in hhs:
        ...
    
 An example code snippet dumping a PHH file in `PokerKit <https://doi.org/10.1109/TG.2023.3325637>`_ is shown below. This hand, played between `Viktor Blom and Patrik Antonius <https://www.cardschat.com/news/10-largest-online-poker-pots-93487/>`_, holds the record for the largest online poker pot ever played.
@@ -27,6 +39,7 @@ An example code snippet dumping a PHH file in `PokerKit <https://doi.org/10.1109
 .. code-block:: python
 
    from pokerkit import *
+
    A = Automation
    # Game state construction
    game = PotLimitOmahaHoldem(
@@ -75,6 +88,19 @@ An example code snippet dumping a PHH file in `PokerKit <https://doi.org/10.1109
        game, state,
    )
    hh.players = ["Patrik Antonius", "Viktor Blom"]
+
    # Dump hand
-   with open("...", "wb") as file:
+   with open("path/to/file.phh", "wb") as file:
        hh.dump(file)
+
+An example code snippet dumping a bulk PHH file in `PokerKit <https://doi.org/10.1109/TG.2023.3325637>`_ is shown below.
+
+.. code-block:: python
+
+   from pokerkit import *
+
+   hhs = [...]
+
+   # Dump hands
+   with open("path/to/file.phhs", "wb") as file:
+       HandHistory.dump_all(hhs, file)

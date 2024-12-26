@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 0.0.2 (December 26, 2024)
+----------------------------------
+
+**Added**
+
+- Example ``pokerkit`` usage for bulk PHH file reading and writing.
+
 Version 0.0.1 (September 19, 2024)
 ----------------------------------
 

@@ -9,7 +9,7 @@
 project = 'Poker Hand History File Format Specification'
 copyright = '2024, Juho Kim'
 author = 'Juho Kim'
-release = '0.0.1'
+release = '0.0.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
